@@ -27,3 +27,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Ignorar arquivos gerados pelo IntelliJ
+.idea
+
+# Ignorar arquivos dentro da pasta src, mas não as subpastas
+src/*

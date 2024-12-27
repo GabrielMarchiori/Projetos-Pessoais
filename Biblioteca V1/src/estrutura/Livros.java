@@ -12,15 +12,22 @@ public class Livros {
     private Materiais materiais;
     private Status status;
 
-    private Clientes clientes;
     private Funcionarios funcionarioRealizouCriacao;
+
+    public Livros(String autor, String editora, Funcionarios funcionarioRealizouCriacao, Genero genero, Materiais materiais, String titulo) {
+        this.autor = autor;
+        this.editora = editora;
+        this.funcionarioRealizouCriacao = funcionarioRealizouCriacao;
+        this.genero = genero;
+        this.materiais = materiais;
+        this.titulo = titulo;
+
+        this.status = Status.Disponivel;
+    }
+
 
     public String getAutor() {
         return autor;
-    }
-
-    public Clientes getClientes() {
-        return clientes;
     }
 
     public String getEditora() {
@@ -47,5 +54,20 @@ public class Livros {
         return titulo;
     }
 
+    public void alterarStatus(Status novoStatus) {
+        this.status = novoStatus;
+    }
 
+    public String StatusLivro() {
+        Livros livro = this;
+        return livro.status.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo: " + getTitulo()
+                + "\nAutor: " + getAutor()
+                + "\nEditora: " + getEditora()
+                + "\nGenero: " + getGenero();
+    }
 }

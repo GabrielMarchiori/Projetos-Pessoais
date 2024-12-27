@@ -21,4 +21,24 @@ public class Clientes extends Pessoa {
         this.dataNascimento = dataNascimento;
         this.funcionarioRealizouCadastro = funcionarioRealizouCadastro;
     }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Funcionarios getFuncionarioRealizouCadastro() {
+        return funcionarioRealizouCadastro;
+    }
 }

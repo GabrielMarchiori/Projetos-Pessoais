@@ -22,4 +22,16 @@ public class Funcionarios extends Pessoa {
         this.registro = registro;
         this.salario = salario;
     }
+
+    public Cargos getCargo() {
+        return cargo;
+    }
+
+    public Date getRegistro() {
+        return registro;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
 }

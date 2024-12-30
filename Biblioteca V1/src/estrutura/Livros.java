@@ -1,8 +1,11 @@
 package estrutura;
 
+import modelos.enums.Cargos;
 import modelos.enums.Genero;
 import modelos.enums.Materiais;
 import modelos.enums.Status;
+
+import java.util.List;
 
 public class Livros {
     private String titulo;
@@ -13,18 +16,24 @@ public class Livros {
     private Status status;
 
     private Funcionarios funcionarioRealizouCriacao;
+    private List<Funcionarios> listaFuncionarios;
 
-    public Livros(String autor, String editora, Funcionarios funcionarioRealizouCriacao, Genero genero, Materiais materiais, String titulo) {
-        this.autor = autor;
-        this.editora = editora;
-        this.funcionarioRealizouCriacao = funcionarioRealizouCriacao;
-        this.genero = genero;
-        this.materiais = materiais;
-        this.titulo = titulo;
+    public Livros(String autor, String editora, Funcionarios funcionarioRealizouCriacao, Genero genero, List<Funcionarios> listaFuncionarios, Materiais materiais, String titulo) {
+        for (Funcionarios func : listaFuncionarios) {
+            if (func.getCargo() != Cargos.auxiliar_bibliotecario){
+                this.autor = autor;
+                this.editora = editora;
+                this.funcionarioRealizouCriacao = funcionarioRealizouCriacao;
+                this.genero = genero;
+                this.listaFuncionarios = listaFuncionarios;
+                this.materiais = materiais;
+                this.titulo = titulo;
 
-        this.status = Status.Disponivel;
+                this.status = Status.Disponivel;
+                break;
+            }
+        }
     }
-
 
     public String getAutor() {
         return autor;

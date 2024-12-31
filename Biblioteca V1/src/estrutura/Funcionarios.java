@@ -34,4 +34,9 @@ public class Funcionarios extends Pessoa {
     public double getSalario() {
         return salario;
     }
+
+    @Override
+    public String toString() {
+        return getNome() + " - " + getCpf() + " - " + getCargo() + " - " + getRegistro() + " - " + getSalario();
+    }
 }

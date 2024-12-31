@@ -1,5 +1,6 @@
 package estrutura;
 
+import modelos.Excecoes;
 import modelos.enums.Cargos;
 import modelos.enums.Genero;
 import modelos.enums.Materiais;
@@ -15,22 +16,22 @@ public class Livros {
     private Materiais materiais;
     private Status status;
 
-    private Funcionarios funcionarioRealizouCriacao;
-    private List<Funcionarios> listaFuncionarios;
+    private String funcionarioRealizouCriacao;
 
-    public Livros(String autor, String editora, Funcionarios funcionarioRealizouCriacao, Genero genero, List<Funcionarios> listaFuncionarios, Materiais materiais, String titulo) {
+    public Livros(String autor, String editora, String funcionarioRealizouCriacao, Genero genero, List<Funcionarios> listaFuncionarios, Materiais materiais, String titulo) {
         for (Funcionarios func : listaFuncionarios) {
             if (func.getCargo() != Cargos.auxiliar_bibliotecario){
                 this.autor = autor;
                 this.editora = editora;
                 this.funcionarioRealizouCriacao = funcionarioRealizouCriacao;
                 this.genero = genero;
-                this.listaFuncionarios = listaFuncionarios;
                 this.materiais = materiais;
                 this.titulo = titulo;
 
                 this.status = Status.Disponivel;
                 break;
+            } else {
+                throw new Excecoes("Funcionario nao tem permisao para cadastrar livros");
             }
         }
     }
@@ -43,7 +44,7 @@ public class Livros {
         return editora;
     }
 
-    public Funcionarios getFuncionarioRealizouCriacao() {
+    public String getFuncionarioRealizouCriacao() {
         return funcionarioRealizouCriacao;
     }
 

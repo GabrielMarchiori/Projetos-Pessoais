@@ -88,6 +88,7 @@ public class Livros {
         return "\nTitulo: " + getTitulo()
                 + "\nAutor: " + getAutor()
                 + "\nEditora: " + getEditora()
-                + "\nGenero: " + getGenero();
+                + "\nGenero: " + getGenero()
+                + "\nStatus: " + getStatus();
     }
 }

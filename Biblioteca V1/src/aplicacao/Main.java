@@ -10,6 +10,7 @@ import modelos.enums.Genero;
 import modelos.enums.Materiais;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,7 +83,12 @@ public class Main {
                     cadastrarLivro(livros, funcionarios, funcionarios.get(funcionarioLogado).getNome());
                     break;
                 case 4:
-
+                    for (Funcionarios func : funcionarios) {
+                        if (func.getNome() == login) {
+                            funcionarioLogado = funcionarios.indexOf(func);
+                        }
+                    }
+                    cadastrarAluguel(livros, funcionarios, clientes, funcionarios.get(funcionarioLogado).getNome(), aluguels);
                     break;
                 case 5:
                     break;
@@ -279,34 +285,47 @@ public class Main {
             System.out.println("Livro cadastrado com sucesso!");
             int ultimo = livros.size() - 1;
             System.out.println(livros.get(ultimo).toString());
-
-            System.out.println("Retornando para o menu");
-
         }catch (Excecoes e) {
             System.out.println("Erro ao criar usuario: " + e.getMessage());
+        }finally {
+            System.out.println("Retornando para o menu");
         }
 
     }
 
-    public static void cadastrarAluguel(List<Livros> livros, List<Funcionarios> funcionarios, List<Clientes> clientes, String funcionario) {
+    public static void cadastrarAluguel(List<Livros> livros, List<Funcionarios> funcionarios, List<Clientes> clientes, String funcionario, List<Aluguel> aluguels) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Para realizar o cadastro de um aluguel e necessario informar os seguintes dados");
-        System.out.printf("Cliente (escolha o numero do seu cliente): ");
-        Clientes.consultarClientes(clientes);
-        int opcaoCliente = sc.nextInt();
-        System.out.printf("Livro(s) (escolha o numero do(s) livro(s):\n");
-        Livros.consultarLivros(livros);
-        System.out.println("Separe os numeros por virgula 'v'");
-        String opcaoLivros = sc.nextLine();
+        try {
+            System.out.println("Para realizar o cadastro de um aluguel e necessario informar os seguintes dados");
+            System.out.printf("Cliente (escolha o numero do seu cliente): ");
+            Clientes.consultarClientes(clientes);
+            int opcaoCliente = sc.nextInt();
+            Clientes clienteAluguel = clientes.get(opcaoCliente);
+            System.out.printf("Livro(s) (escolha o numero do(s) livro(s))" +
+                    "\n(serao aceitos apenas os 3 primeiros numeros, pois é limite de livros que podem ser alugados):\n");
+            Livros.consultarLivros(livros);
+            System.out.println("Separe os numeros por virgula 'v'");
+            sc.nextLine();
+            String opcaoLivros = sc.nextLine();
 
-        String[] livrosParaAlugarProvisorio = opcaoLivros.split(",");
-        int[] livrosParaAlugar = new int[livrosParaAlugarProvisorio.length];
+            int tamanhoMaximo = 3;
+            String[] livrosParaAlugarProvisorio = opcaoLivros.split(",");
+            int[] livrosParaAlugar = new int[Math.min(livrosParaAlugarProvisorio.length, tamanhoMaximo)];
 
-        for (int i = 0; i < livrosParaAlugar.length; i++) {
-            livrosParaAlugar[i] = Integer.parseInt(livrosParaAlugarProvisorio[i]);
+            for (int i = 0; i < livrosParaAlugar.length; i++) {
+                livrosParaAlugar[i] = Integer.parseInt(livrosParaAlugarProvisorio[i].trim());
+            }
+
+            aluguels.add(new Aluguel(clienteAluguel, LocalDate.now(), funcionario, livros, livrosParaAlugar, funcionarios));
+        }catch (Excecoes e) {
+            if (e.getMessage() == "Funcionario nao tem permisao para regristrar alugeis"){
+                System.out.println("Erro ao criar alguel: " + e.getMessage());
+            }else {
+                System.out.println("Erro ao alugar livro: " + e.getMessage());
+            }
+
         }
-
 
 
 

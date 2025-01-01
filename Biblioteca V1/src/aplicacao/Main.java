@@ -289,6 +289,26 @@ public class Main {
     }
 
     public static void cadastrarAluguel(List<Livros> livros, List<Funcionarios> funcionarios, List<Clientes> clientes, String funcionario) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Para realizar o cadastro de um aluguel e necessario informar os seguintes dados");
+        System.out.printf("Cliente (escolha o numero do seu cliente): ");
+        Clientes.consultarClientes(clientes);
+        int opcaoCliente = sc.nextInt();
+        System.out.printf("Livro(s) (escolha o numero do(s) livro(s):\n");
+        Livros.consultarLivros(livros);
+        System.out.println("Separe os numeros por virgula 'v'");
+        String opcaoLivros = sc.nextLine();
+
+        String[] livrosParaAlugarProvisorio = opcaoLivros.split(",");
+        int[] livrosParaAlugar = new int[livrosParaAlugarProvisorio.length];
+
+        for (int i = 0; i < livrosParaAlugar.length; i++) {
+            livrosParaAlugar[i] = Integer.parseInt(livrosParaAlugarProvisorio[i]);
+        }
+
+
+
 
     }
 

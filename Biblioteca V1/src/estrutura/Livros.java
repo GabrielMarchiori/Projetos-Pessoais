@@ -73,9 +73,19 @@ public class Livros {
         return livro.status.toString();
     }
 
+
+    public static String consultarLivros(List<Livros> livros) {
+        int posicao = 0;
+        for (Livros livro : livros) {
+            System.out.println(livro.toString() + "livro numero: " + posicao);
+            posicao++;
+        }
+        return "";
+    }
+
     @Override
     public String toString() {
-        return "Titulo: " + getTitulo()
+        return "\nTitulo: " + getTitulo()
                 + "\nAutor: " + getAutor()
                 + "\nEditora: " + getEditora()
                 + "\nGenero: " + getGenero();

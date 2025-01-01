@@ -27,6 +27,8 @@ public class Clientes extends Pessoa {
         }
     }
 
+
+
     public Clientes(String cpf, String nome, char sexo, Date dataCadastro, Date dataNascimento, String funcionarioRealizouCadastro, List<Funcionarios> funcionarios) {
         super(cpf, nome, sexo);
         for (Funcionarios funcionarios1 : funcionarios){
@@ -61,6 +63,15 @@ public class Clientes extends Pessoa {
 
     public String getFuncionarioRealizouCadastro() {
         return funcionarioRealizouCadastro;
+    }
+
+    public static String consultarClientes(List<Clientes> clientes) {
+        int posicao = 0;
+        for (Clientes client : clientes) {
+            System.out.println(client.getNome() + " numero: " + posicao);
+            posicao++;
+        }
+        return "";
     }
 
     @Override
